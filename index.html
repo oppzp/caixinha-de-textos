@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cartas de amor</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #f7a85a;
+      color: #333;
+      font-family: sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #ffffff;
+    }
+
+    header p {
+      color: #fff;
+      opacity: 0.9;
+    }
+
+    .caixinhas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2rem;
+      gap: 1.5rem;
+    }
+
+    .caixinha {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 240px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+      box-shadow: 0 10px 25px rgb(240, 195, 145); /* sombra da caixa */
+    }
+
+    .caixinha:hover {
+      transform: scale(1.05);
+    }
+
+    .caixinha h2 {
+      font-size: 1.2rem;
+      color: #ff8c1a;
+      margin: 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      color:#f7a85a;
+    }
+
+    .modal-content h3 {
+      color: #ff8c1a;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .close-btn {
+      margin-top: 1.5rem;
+      background: #ff8c1a;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* 💖 CORAÇÕES */
+    .coracao {
+      position: fixed;
+      font-size: 18px;
+      color: #ff5e81;
+      pointer-events: none;
+      animation: flutuar 3s linear forwards;
+      z-index: 2000;
+    }
+
+    .coracao2 {
+      position: fixed;
+      font-size: 24px;
+      color: #ffb6c1;
+      pointer-events: none;
+      animation: flutuar2 4s linear forwards;
+      z-index: 2000;
+    }
+
+    @keyframes flutuar {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-150px) scale(1.3); opacity: 0; }
+    }
+
+    @keyframes flutuar2 {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+   .titulo-box {
+  display: inline-block;
+  background: #ffffff;
+  padding: 1.8rem 2.5rem;
+  border-radius: 1.6rem;
+  box-shadow: 0 15px 35px rgba(255, 140, 26, 0.35);
+}
+
+.titulo-box h1 {
+  margin: 0;
+  color: #ff8c1a;
+  font-size: 2.8rem;
+}
+
+.titulo-box p {
+  margin-top: 0.6rem;
+  color: #a85600;
+  font-size: 1rem;
+}
+  </style>
+</head>
+
+<body>
+
+  <header>
+  <div class="titulo-box">
+    <h1>cartas de amor</h1>
+    <p>cartinhas feitas com todo meu coração 🧡</p>
+  </div>
+</header>
+
+
+  <section class="caixinhas">
+    <div class="caixinha" onclick="abrirCaixinha('1mes')">
+      <h2>💌 1 mês que nos conhecemos</h2>
+    </div>
+
+    <div class="caixinha" onclick="abrirCaixinha('orgulho bolsa')">
+      <h2>🎊 PARABENS PELA BOLSA AMOR</h2>
+    </div>
+  </section>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h3 id="modal-title"></h3>
+      <div id="modal-text"></div>
+      <button class="close-btn" onclick="fecharModal()">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const title = document.getElementById('modal-title');
+    const text = document.getElementById('modal-text');
+
+    let intervaloCoracoes = null;
+
+    const cartas = {
+      '1mes': {
+        titulo: '💌 Um mês que nos conhecemos',
+        conteudo: `
+          <img 
+            src="carta-aberta.png" 
+            alt="cartinha um mes"
+            style="
+              max-width: 100%;
+              border-radius: 16px;
+              box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            "
+          >
+        `
+      },
+      'orgulho bolsa': {
+  titulo: '🎊 PARABENS PELA BOLSA MOMO',
+  conteudo: `
+    <p style="text-align: center; margin-bottom: 1rem;">
+      meu momo, ver você conquistar essa bolsa enche meu coração de orgulho sabia?? tudo isso é reflexo da mulher incrível, dedicada e forte que eu me apaixonei. isso é pouco perto das grandes coisas que voce ainda vai alcançar, eu te amo ✨
+    </p>
+
+    <img 
+      src="foto0.jpg" 
+      alt="foto0"
+      style="
+        max-width: 40%;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        display: block;
+        margin: 0 auto;
+      "
+    >
+  `
+}
+
+    };
+
+    function criarCoracaoAleatorio() {
+      const coracao = document.createElement('div');
+
+      if (Math.random() < 0.5) {
+        coracao.className = 'coracao';
+        coracao.textContent = '🧡';
+      } else {
+        coracao.className = 'coracao2';
+        coracao.textContent = '💜';
+      }
+
+      coracao.style.left = Math.random() * window.innerWidth + 'px';
+      coracao.style.top = Math.random() * window.innerHeight + 'px';
+
+      document.body.appendChild(coracao);
+      setTimeout(() => coracao.remove(), 4000);
+    }
+
+    function abrirCaixinha(nome) {
+      title.textContent = cartas[nome].titulo;
+      text.innerHTML = cartas[nome].conteudo;
+      modal.style.display = 'flex';
+
+      intervaloCoracoes = setInterval(criarCoracaoAleatorio, 200);
+    }
+
+    function fecharModal() {
+      modal.style.display = 'none';
+      clearInterval(intervaloCoracoes);
+      intervaloCoracoes = null;
+    }
+  </script>
+
+</body>
+</html>
