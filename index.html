@@ -172,6 +172,10 @@
     <div class="caixinha" onclick="abrirCaixinha('orgulho bolsa')">
       <h2>🎊 PARABENS PELA BOLSA AMOR</h2>
     </div>
+
+  <div class="caixinha" onclick="abrirCaixinha('2mes')">
+      <h2>💌 2 mês que nos conhecemos</h2>
+    </div>
   </section>
 
   <div class="modal" id="modal">
@@ -223,10 +227,29 @@
       "
     >
   `
+  },
+
+    '2mes': {
+  titulo: '💌 2 mês que nos conhecemos',
+  conteudo: `
+    <p style="text-align: center; margin-bottom: 1rem;">
+      OIII gostosa, 
+Dois meses que nos conhecemos hein, fico tao feliz que estamos dando certo, isso me deixa tao contente. Amo ter uma aliança com seu nome cravado nela, e estou morrendo de saudade de você sabia?? A cada momento que se passa eu te quero mais, eu te desejo mais e as vezes parece impossivel aguentar essa saudade. Eu amo receber suas mensagens, suas ligações, suas fotos, amo saber os detalhes mais bobos do seu dia, eu amo tudo que envolve você, minha princesa preciosa, vamos comemorar mais e mais meses e depois vamos comemorar meses de namoro, anos e depois nossos aniversários de casamento, eu te amo demais princesinha linda!!!
+    </p>
+        <img 
+      src="foto1.jpg" 
+      alt="foto1"
+      style="
+        max-width: 40%;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        display: block;
+        margin: 0 auto;
+      "
+    >
+`
 }
-
-    };
-
+};
     function criarCoracaoAleatorio() {
       const coracao = document.createElement('div');
 
